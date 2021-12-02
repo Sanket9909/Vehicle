@@ -22,7 +22,6 @@ exports.create = async (req, res) => {
     });
 
 
-
     // Save customer in the database
     await customer.save()
         .then(data => {

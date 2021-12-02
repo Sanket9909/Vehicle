@@ -19,7 +19,6 @@ API_GET_serviceBYID:`/api/service/:serviceId`,
 API_PUT_serviceBYID:`/api/service/:serviceId`,
 API_PUT_serviceBYNAME:`/api/service/:serviceName`,
 API_DELETE_serviceBYID:`/api/service/:serviceId`,
-
 API_GET_servicelisting:`/api/servicelist`,
 
 /**
@@ -27,5 +26,13 @@ API_GET_servicelisting:`/api/servicelist`,
  */
 
 API_POST_AUTH:`/api/auth`,
+
+
+/**
+ * make
+ */
+
+ API_GET_MAKE:`/api/make`,
+ API_POST_MAKE:`/api/make`,
 })
 
