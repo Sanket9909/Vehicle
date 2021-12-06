@@ -4,7 +4,7 @@ const Customer = require('../modal/customer');
 // Create and Save a new customer
 exports.create = async (req, res) => {
     // Validate request
-    if (!req.body.cust_name) {
+    if (!req.body.name) {
         return res.status(400).send({
             message: "customer name content can not be empty"
         });
@@ -12,20 +12,20 @@ exports.create = async (req, res) => {
 
     // Create a customer name
     const customer = new Customer({
-        cust_name: req.body.cust_name,
+        name: req.body.name,
         mobile: req.body.mobile,
         email: req.body.email,
         make: req.body.make,
-        vehicle_number:  req.body.vehicle_number,
+        model: req.body.model,
+        carNumber: req.body.carNumber,
         createdDate: new Date(),
         changeDate: new Date()
     });
 
-
     // Save customer in the database
     await customer.save()
         .then(data => {
-            res.send(data);
+            res.status(200).send({ data });
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while creating the customer list."
@@ -38,7 +38,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
     await Customer.find()
         .then(customer => {
-            res.send(customer);
+            res.json(customer);
         }).catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving customer list."
@@ -73,14 +73,14 @@ exports.findOne = async (req, res) => {
 exports.update = async (req, res) => {
     if (!req.body) {
         return res.status(400).send({
-          message: "Data to update can not be empty!"
+            message: "Data to update can not be empty!"
         });
-      }
-    
-      const customerId = req.params.customerId;
+    }
+
+    const customerId = req.params.customerId;
     // Find customer and update it with the request body
-    await Customer.findByIdAndUpdate(customerId, req.body, {useFindAndModify: false})
-       
+    await Customer.findByIdAndUpdate(customerId, req.body, { useFindAndModify: false })
+
         .then(customer => {
             if (!customer) {
                 return res.status(404).send({

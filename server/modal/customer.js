@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-
+const opts = { toJSON: { virtuals: true } };
 const customerSchema = mongoose.Schema({
-    cust_name: {
+    name: {
         type: String,
         trim: true,
         required: true
@@ -14,20 +14,26 @@ const customerSchema = mongoose.Schema({
     email: {
         type: String,
         trim: true,
-        required: true
+        required: true,
+        unique:true,
+        dropDups:true
     },
     make:{
         type: String,
         trim: true,
         required: true
     },
-    vehicle_number :{
-        type: [String],
+    model:{
+        type: String,
+        trim: true,
         required: true
     },
-    sub_cat: { type: Object, trim: true },
+    carNumber :{
+        type: String,
+        required: true
+    },
     createdDate: Date,
     changeDate: Date
-});
+},opts);
 
 module.exports = mongoose.model('customer', customerSchema);
