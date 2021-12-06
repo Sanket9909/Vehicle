@@ -8,11 +8,11 @@ exports.create = async (req, res) => {
             message: "Service content can not be empty"
         });
     }
-    
+
     // Create a service
     const service = new Service({
         service_name: req.body.service_name,
-        vehicle_number:  req.body.vehicle_number,
+        vehicle_number: req.body.vehicle_number,
         totalbill: req.body.totalbill || 0,
         createdDate: new Date(),
         changeDate: new Date()
@@ -69,14 +69,14 @@ exports.findOne = async (req, res) => {
 exports.update = async (req, res) => {
     if (!req.body) {
         return res.status(400).send({
-          message: "Data to update can not be empty!"
+            message: "Data to update can not be empty!"
         });
-      }
-    
-      const serviceId = req.params.serviceId;
+    }
+
+    const serviceId = req.params.serviceId;
     // Find service and update it with the request body
-    await Service.findByIdAndUpdate(serviceId, req.body, {useFindAndModify: false})
-       
+    await Service.findByIdAndUpdate(serviceId, req.body, { useFindAndModify: false })
+
         .then(service => {
             if (!service) {
                 return res.status(404).send({
